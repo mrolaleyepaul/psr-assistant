@@ -1,0 +1,219 @@
+[
+ {
+  "q": "How many days of annual leave does a GL 08 officer get?",
+  "expect": [
+   "120203"
+  ],
+  "fact": "30 working days for GL 07 and above"
+ },
+ {
+  "q": "How long must I wait after my last annual leave before I can go on leave again?",
+  "expect": [
+   "120204"
+  ],
+  "fact": "not less than six months after the previous leave"
+ },
+ {
+  "q": "How many days of casual leave can I take in a year?",
+  "expect": [
+   "120215"
+  ],
+  "fact": "maximum of seven days"
+ },
+ {
+  "q": "How much maternity leave can a female officer take?",
+  "expect": [
+   "120218",
+   "120217"
+  ],
+  "fact": "112 working days with full pay"
+ },
+ {
+  "q": "Do male officers get leave when their wife gives birth?",
+  "expect": [
+   "120219"
+  ],
+  "fact": "14 working days, once in two years, max four children"
+ },
+ {
+  "q": "What is study leave and who can get it?",
+  "expect": [
+   "120225",
+   "120226"
+  ],
+  "fact": "granted to a confirmed serving officer"
+ },
+ {
+  "q": "What should I do if I am sick and cannot come to work?",
+  "expect": [
+   "130301",
+   "120216"
+  ],
+  "fact": "notify Ministry/Agency; prolonged absence needs supporting documents"
+ },
+ {
+  "q": "What happens if I'm given a query?",
+  "expect": [
+   "100302"
+  ],
+  "fact": "written details of unsatisfactory behaviour; submit written representation within a specific time"
+ },
+ {
+  "q": "My supervisor wants to interdict me. What does that mean?",
+  "expect": [
+   "100405",
+   "100406",
+   "010105",
+   "100404",
+   "100403"
+  ],
+  "fact": "interdiction definition and conditions"
+ },
+ {
+  "q": "What is the difference between suspension and interdiction?",
+  "expect": [
+   "100406"
+  ],
+  "fact": "suspension is not a synonym for interdiction"
+ },
+ {
+  "q": "What are examples of serious misconduct?",
+  "expect": [
+   "100402"
+  ],
+  "fact": "falsification of records, suppression of records, absence without leave, etc."
+ },
+ {
+  "q": "Can I do private business while in the civil service?",
+  "expect": [
+   "100425"
+  ],
+  "fact": "no private practice, exemptions for medical practitioners, law lecturers, ICT and agric business"
+ },
+ {
+  "q": "Can a civil servant buy shares or be a company director?",
+  "expect": [
+   "100424"
+  ],
+  "fact": "may hold shares; not director of private companies"
+ },
+ {
+  "q": "Can I join a political party or contest an election?",
+  "expect": [
+   "100422"
+  ],
+  "fact": "no political office or candidacy without express permission of Government"
+ },
+ {
+  "q": "Can I accept gifts from people I serve?",
+  "expect": [
+   "100433",
+   "100434"
+  ],
+  "fact": "no gifts in recognition or anticipation of service"
+ },
+ {
+  "q": "What is the retirement age in the civil service?",
+  "expect": [
+   "020908"
+  ],
+  "fact": "60 years or 35 years of pensionable service, whichever is earlier"
+ },
+ {
+  "q": "What do I lose if I resign?",
+  "expect": [
+   "020904"
+  ],
+  "fact": "forfeit claims to vacation leave; refund money owed"
+ },
+ {
+  "q": "How long is probation for a new officer?",
+  "expect": [
+   "020301"
+  ],
+  "fact": "two years"
+ },
+ {
+  "q": "What do I need to be confirmed in my appointment?",
+  "expect": [
+   "020303",
+   "020302"
+  ],
+  "fact": "eligibility conditions for confirmation"
+ },
+ {
+  "q": "Does acting in a post mean I will be promoted?",
+  "expect": [
+   "020703"
+  ],
+  "fact": "acting appointment is not a means of testing suitability for promotion"
+ },
+ {
+  "q": "What is the difference between transfer and secondment?",
+  "expect": [
+   "020501"
+  ],
+  "fact": "transfer is permanent release"
+ },
+ {
+  "q": "Who is entitled to overtime allowance?",
+  "expect": [
+   "140121",
+   "140120"
+  ],
+  "fact": "officers on GL 14 and below"
+ },
+ {
+  "q": "What is duty tour allowance for?",
+  "expect": [
+   "140107"
+  ],
+  "fact": "to pay for lodging and feeding on official travel"
+ },
+ {
+  "q": "What happens to my entitlements if I die in service?",
+  "expect": [
+   "160201"
+  ],
+  "fact": "life insurance entitlements paid to legal representative / next of kin"
+ },
+ {
+  "q": "How can I send a petition to the Head of Government?",
+  "expect": [
+   "110103",
+   "110202"
+  ],
+  "fact": "unsealed, in triplicate, through the proper channels"
+ },
+ {
+  "q": "Can I use a big man to help my promotion?",
+  "expect": [
+   "100427"
+  ],
+  "fact": "no seeking influence of prominent persons"
+ },
+ {
+  "q": "Wetin go happen if I no come work for one week without permission?",
+  "expect": [
+   "100413",
+   "100402"
+  ],
+  "fact": "absence without leave: liable to dismissal (100413); listed as serious misconduct (100402)"
+ },
+ {
+  "q": "What rules apply to virtual meetings?",
+  "expect": [
+   "090201",
+   "090105",
+   "090101"
+  ],
+  "fact": "predefined agenda, protocols"
+ },
+ {
+  "q": "If I am suspended and later cleared, do I get my salary back?",
+  "expect": [
+   "100307"
+  ],
+  "fact": "reinstated with full salary denied if interdicted or suspended (Rule 100307(x))"
+ }
+]
