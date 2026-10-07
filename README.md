@@ -78,6 +78,7 @@ psr-assistant/
 ├── ask.py            # Chat with the assistant in the terminal
 ├── main.py           # FastAPI web service
 ├── evaluate.py       # Retrieval and answer evaluation
+├── export_embeddings.py  # Exports embeddings for deployment (data/embeddings.npz)
 ├── setup_key.py      # Saves and verifies your Gemini API key
 ├── check_key.py      # API-key diagnostics
 ├── requirements.txt
@@ -105,7 +106,7 @@ conda activate psr
 python -m venv venv
 venv\Scripts\activate
 
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 ### 2. Add your API key
@@ -229,6 +230,18 @@ On Gemini's free tier, each question costs two calls (one embedding, one answer)
 - **Excerpts for long rules.** The longest rules (e.g. Rule 100307, the dismissal procedure) are sent as focused excerpts of the clauses that match the question, so key sentences aren't buried.
 - **Section context.** Each rule carries its chapter and section name, so rules for special groups (e.g. non-pensionable appointments) aren't presented as applying to everyone.
 
+## Deployment (Render)
+
+The server doesn't need Chroma. `export_embeddings.py` saves the rule embeddings into `data/embeddings.npz`, which is committed, so the deployed service searches with NumPy and never re-embeds the rules.
+
+1. Locally, after `ingest.py`: `python export_embeddings.py`, then commit `data/embeddings.npz`.
+2. On [Render](https://render.com), create a **Blueprint** from this repository (it reads `render.yaml`), or a **Web Service** with:
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+3. Set the `GEMINI_API_KEY` environment variable in the Render dashboard (never in the code).
+
+Local development that rebuilds the database needs the extra packages in `requirements-dev.txt`.
+
 ## Limitations
 
 - **Scanned source.** The PSR text was extracted from a scanned copy. Cleaning removes most artefacts, but some OCR errors remain, and a few rule numbers were misread in the source.
@@ -245,7 +258,7 @@ On Gemini's free tier, each question costs two calls (one embedding, one answer)
 - [ ] Web chat interface for officers
 - [ ] WhatsApp channel
 - [ ] Optional self-hosted model (Ollama) for fully offline deployment
-- [ ] Deployment
+- [ ] Production deployment (paid, organisation-owned key)
 
 ## Copyright notice
 

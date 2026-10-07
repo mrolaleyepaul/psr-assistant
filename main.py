@@ -20,6 +20,10 @@ class Ask(BaseModel):
 def ask(body: Ask):
     return answer(body.question, [t.model_dump() for t in body.history], body.audience)
 
+@app.get("/")
+def home():
+    return {"service": "PSR Assistant", "ask": "POST /ask", "docs": "/docs"}
+
 @app.get("/health")
 def health():
     return {"ok": True}

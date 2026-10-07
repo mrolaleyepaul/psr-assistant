@@ -1,7 +1,7 @@
 """Step 3: retrieval + answer generation."""
 import json, math, os, re, time
 import httpx
-import chromadb
+import numpy as np
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types, errors
@@ -11,7 +11,33 @@ client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 CHAT_MODEL = os.getenv("CHAT_MODEL", "gemini-2.5-flash")
 FALLBACK_MODEL = os.getenv("FALLBACK_MODEL", "gemini-2.5-flash-lite")  # used when the main model is overloaded
 EMBED_MODEL = os.getenv("EMBED_MODEL", "gemini-embedding-001")
-col = chromadb.PersistentClient(path="data/chroma").get_collection("psr")
+
+class VectorStore:
+    """Rule embeddings for meaning search.
+    Uses data/embeddings.npz (a small file that is committed and deployed, e.g. to Render) when present;
+    otherwise falls back to the local Chroma database built by ingest.py."""
+    def __init__(self):
+        if os.path.exists("data/embeddings.npz"):
+            d = np.load("data/embeddings.npz")
+            self.ids = [str(i) for i in d["ids"]]
+            v = d["vectors"].astype(np.float32)
+            self.vectors = v / np.linalg.norm(v, axis=1, keepdims=True)
+            self.chroma = None
+        else:
+            import chromadb
+            self.chroma = chromadb.PersistentClient(path="data/chroma").get_collection("psr")
+
+    def count(self):
+        return len(self.ids) if self.chroma is None else self.chroma.count()
+
+    def search(self, query_vector, k):
+        if self.chroma is not None:
+            return self.chroma.query(query_embeddings=[query_vector], n_results=k, include=[])["ids"][0]
+        q = np.asarray(query_vector, dtype=np.float32)
+        scores = self.vectors @ (q / np.linalg.norm(q))
+        return [self.ids[i] for i in np.argsort(-scores)[:k]]
+
+col = VectorStore()
 
 SYSTEM = """You are the PSR Assistant. You explain the Nigerian Public Service Rules (PSR), 2021 Edition,
 to government workers so they clearly understand what a rule means and how it affects them.
@@ -189,8 +215,7 @@ def rule_text(rid, question, long_words=350, keep=3):
 def retrieve(question: str, k: int = 6, max_total: int = 10):
     ids = [n for n in re.findall(r"\b\d{6}\b", question) if n in RULES]   # rule numbers typed by the user
     q = embed_query(question)
-    res = col.query(query_embeddings=[q], n_results=k, include=[])
-    for rid in res["ids"][0] + keyword_search(question):
+    for rid in col.search(q, k) + keyword_search(question):
         if rid not in ids:
             ids.append(rid)
     ids += cross_references(ids)

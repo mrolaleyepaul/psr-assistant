@@ -1,0 +1,3 @@
+# Extra packages for building the vector database locally (ingest.py, export_embeddings.py)
+-r requirements.txt
+chromadb

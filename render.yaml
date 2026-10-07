@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: psr-assistant
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CHAT_MODEL
+        value: gemini-2.5-flash
+      - key: FALLBACK_MODEL
+        value: gemini-2.5-flash-lite
+      - key: EMBED_MODEL
+        value: gemini-embedding-001
